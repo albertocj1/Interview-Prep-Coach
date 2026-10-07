@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interview Prep Coach</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23172230'/%3E%3Cpath d='M6 9.5a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-8l-5 4.5v-4.5H9a3 3 0 0 1-3-3z' fill='%23FFE45C'/%3E%3Crect x='10' y='11' width='12' height='2.4' rx='1.2' fill='%23172230'/%3E%3Crect x='10' y='15' width='8' height='2.4' rx='1.2' fill='%23172230'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Tokens (shared with Resume Fit Analyzer) ---------- */
+  :root {
+    --paper: #EAEFF3;
+    --sheet: #FFFFFF;
+    --ink: #172230;
+    --muted: #5A6777;
+    --line: #C9D2DC;
+    --accent: #2946C4;
+    --accent-ink: #FFFFFF;
+    --highlight: #FFE45C;
+    --highlight-ink: #172230;
+    --band-no: #B8432F;
+    --band-partial: #C98A0B;
+    --band-good: #3B8758;
+    --band-strong: #2946C4;
+    --sans: "Bricolage Grotesque", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --r-sm: 6px;
+    --r-lg: 14px;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #11171F; --sheet: #1A222D; --ink: #E6ECF2; --muted: #9AA7B6; --line: #2F3A48;
+      --accent: #7E97FF; --accent-ink: #0E1530; --highlight: #E8CF45; --highlight-ink: #161A10;
+      --band-no: #E07A64; --band-partial: #E2AE3C; --band-good: #6CC08A; --band-strong: #7E97FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #11171F; --sheet: #1A222D; --ink: #E6ECF2; --muted: #9AA7B6; --line: #2F3A48;
+    --accent: #7E97FF; --accent-ink: #0E1530; --highlight: #E8CF45; --highlight-ink: #161A10;
+    --band-no: #E07A64; --band-partial: #E2AE3C; --band-good: #6CC08A; --band-strong: #7E97FF;
+  }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html, body { margin: 0; }
+  html { scroll-padding-top: calc(16px + env(safe-area-inset-top, 0px)); }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  [hidden] { display: none !important; }
+
+  .page { max-width: 1120px; margin: 0 auto; padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 40px) 64px; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding-bottom: 14px; margin-bottom: clamp(24px, 4vw, 40px);
+    border-bottom: 1px solid var(--line); font-size: 0.9375rem;
+  }
+  .wordmark { font-weight: 800; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
+  .wordmark::before {
+    content: ""; width: 14px; height: 10px; border-radius: 2px 5px 2px 6px;
+    background: var(--highlight); box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+  .byline { color: var(--muted); margin-left: 4px; }
+  .topbar a { color: inherit; text-underline-offset: 3px; }
+  .topbar a:hover { color: var(--accent); }
+  .topbar-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  header { max-width: 42rem; margin-bottom: clamp(24px, 4vw, 40px); }
+  h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 12px; }
+  header p { margin: 0; color: var(--muted); font-size: 1.0625rem; max-width: 36rem; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(16px, 3vw, 32px); align-items: start; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+
+  /* ---------- Form ---------- */
+  form { display: flex; flex-direction: column; gap: 20px; }
+  .field-label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .hint { color: var(--muted); font-size: 0.875rem; font-weight: 400; }
+  textarea {
+    width: 100%; resize: vertical; padding: 14px 16px;
+    font: inherit; font-size: 0.9375rem; color: var(--ink);
+    background: var(--sheet); border: 1.5px solid var(--line); border-radius: var(--r-sm);
+  }
+  #jd { min-height: 240px; }
+  textarea:focus-visible, .drop:focus-within, button:focus-visible, a:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 2px;
+  }
+  .handoff {
+    padding: 12px 14px; border-radius: var(--r-sm);
+    background: var(--sheet); border-left: 4px solid var(--highlight);
+    font-size: 0.9375rem;
+  }
+  .handoff p { margin: 0; }
+  .handoff button { margin-top: 6px; background: none; border: 0; padding: 0; font: inherit; font-size: 0.875rem; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+  .drop {
+    position: relative; display: flex; align-items: center; gap: 14px; padding: 18px 16px;
+    background: var(--sheet); border: 1.5px dashed var(--line); border-radius: var(--r-sm);
+    cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  .drop:hover { border-color: var(--muted); }
+  .drop.dragging { border-color: var(--accent); border-style: solid; }
+  .drop.has-file { border-style: solid; }
+  .drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }
+  .doc-icon {
+    flex: none; width: 34px; height: 42px; border: 1.5px solid var(--ink); border-radius: 3px;
+    background:
+      linear-gradient(var(--line), var(--line)) 7px 14px / 16px 2px no-repeat,
+      linear-gradient(var(--line), var(--line)) 7px 20px / 18px 2px no-repeat,
+      linear-gradient(var(--line), var(--line)) 7px 26px / 12px 2px no-repeat;
+  }
+  .drop.has-file .doc-icon {
+    background:
+      linear-gradient(var(--highlight), var(--highlight)) 5px 12px / 20px 6px no-repeat,
+      linear-gradient(var(--line), var(--line)) 7px 22px / 18px 2px no-repeat,
+      linear-gradient(var(--line), var(--line)) 7px 28px / 12px 2px no-repeat;
+  }
+  .drop-text strong { display: block; font-weight: 600; word-break: break-all; }
+  .drop-text span { color: var(--muted); font-size: 0.875rem; }
+
+  .actions-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  button.primary, button.ghost {
+    font: inherit; font-weight: 600; border-radius: 999px; cursor: pointer;
+  }
+  button.primary { padding: 13px 26px; font-size: 1rem; color: var(--accent-ink); background: var(--accent); border: none; }
+  button.primary:hover { filter: brightness(1.08); }
+  button.ghost { padding: 11px 20px; font-size: 0.9375rem; background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+  button.ghost:hover { border-color: var(--ink); }
+  button:disabled { opacity: .55; cursor: progress; }
+  .form-error { color: var(--band-no); font-size: 0.9375rem; margin: -6px 0 0; min-height: 1.5em; }
+
+  /* ---------- Panels ---------- */
+  .panel { background: var(--sheet); border-radius: var(--r-lg); padding: clamp(20px, 3.5vw, 36px); border: 1px solid var(--line); }
+  #setupPanel { min-height: 420px; }
+  .intro { display: flex; flex-direction: column; gap: 28px; }
+  .intro-text { color: var(--muted); max-width: 30rem; }
+  .intro-text strong, .state strong { color: var(--ink); font-size: 1.25rem; display: block; margin-bottom: 4px; }
+  .ghost-preview {
+    opacity: .38; pointer-events: none; user-select: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+            mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  }
+  .state { min-height: 360px; display: flex; flex-direction: column; justify-content: center; color: var(--muted); max-width: 28rem; }
+  .state.error strong { color: var(--band-no); }
+  .error-detail { margin: 12px 0 0; font-size: 0.8125rem; color: var(--muted); word-break: break-word; }
+
+  .scan { height: 4px; width: 100%; max-width: 260px; margin-top: 20px; background: var(--line); border-radius: 2px; overflow: hidden; position: relative; }
+  .scan::after { content: ""; position: absolute; top: 0; bottom: 0; width: 35%; background: var(--highlight); animation: sweep 1.3s ease-in-out infinite; }
+  @keyframes sweep { from { left: -35%; } to { left: 100%; } }
+  .loading-step { transition: opacity .25s; }
+  .loading-count { margin-top: 10px; font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Question card (the memorable element) ---------- */
+  .q-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 0.875rem; color: var(--muted); margin-bottom: 14px; }
+  .q-count { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+  .chip { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8125rem; font-weight: 600; border: 1.5px solid currentColor; }
+  .chip.gap { color: var(--band-no); }
+  .chip.technical { color: var(--accent); }
+  .chip.behavioral { color: var(--band-good); }
+  .chip.role-fit { color: var(--band-partial); }
+  .q-text {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(1.375rem, 2.6vw, 1.75rem); line-height: 1.32; letter-spacing: -0.005em;
+    margin: 0 0 16px; max-width: 34em;
+  }
+  .q-text::before { content: "\201C"; color: var(--highlight); -webkit-text-stroke: 1px var(--ink); margin-right: 2px; }
+  .q-text::after { content: "\201D"; color: var(--highlight); -webkit-text-stroke: 1px var(--ink); margin-left: 1px; }
+  .thread-note { font-size: 0.875rem; color: var(--muted); margin: -4px 0 14px; }
+  .why { margin: 0 0 10px; color: var(--muted); font-size: 0.9375rem; max-width: 40rem; }
+  .why b { color: var(--ink); font-weight: 600; }
+  .reveal { background: none; border: 0; padding: 0; font: inherit; font-size: 0.9375rem; font-weight: 600; color: var(--accent); cursor: pointer; text-underline-offset: 3px; }
+  .reveal:hover { text-decoration: underline; }
+  .covers { margin: 10px 0 0; padding-left: 1.2em; font-size: 0.9375rem; max-width: 40rem; }
+  .covers li + li { margin-top: 4px; }
+
+  .answer-box { margin-top: 24px; }
+  #answer { min-height: 180px; font-size: 1rem; line-height: 1.6; }
+  .answer-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.8125rem; color: var(--muted); margin: 6px 0 16px; }
+  .answer-foot b { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+
+  /* ---------- Feedback ---------- */
+  .feedback { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .fb-head { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
+  .fb-score { font-size: clamp(3.5rem, 9vw, 5rem); font-weight: 800; line-height: .85; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+  .fb-score small { font-size: .32em; font-weight: 600; letter-spacing: 0; color: var(--muted); margin-left: 3px; }
+  .fb-verdict { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.015em; padding-bottom: 4px; }
+
+  .rubric { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; margin-bottom: 24px; max-width: 34rem; }
+  @media (max-width: 480px) { .rubric { grid-template-columns: 1fr; } }
+  .rubric-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 0.9375rem; }
+  .pips { display: flex; gap: 3px; }
+  .pips i { width: 14px; height: 8px; border-radius: 2px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); }
+  .pips i.on { background: var(--ink); box-shadow: none; }
+
+  .fb-section + .fb-section { margin-top: 20px; }
+  .fb-section h3 { font-size: 1rem; font-weight: 600; margin: 0 0 8px; }
+  .fb-list { margin: 0; padding-left: 1.2em; max-width: 40rem; }
+  .fb-list li + li { margin-top: 4px; }
+  .better {
+    font-family: var(--serif); font-size: 1.0625rem; line-height: 1.65; margin: 0;
+    padding: 14px 18px; background: var(--paper); border-radius: var(--r-sm); max-width: 40rem; white-space: pre-wrap;
+  }
+  .follow {
+    margin-top: 22px; padding: 16px 18px; border-radius: var(--r-sm);
+    border: 1.5px dashed var(--muted); max-width: 40rem;
+  }
+  .follow p { margin: 0 0 12px; font-family: var(--serif); font-size: 1.0625rem; }
+  .follow span { display: block; font-size: 0.875rem; color: var(--muted); margin-bottom: 4px; }
+  .fb-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ---------- Practice layout ---------- */
+  .practice { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); align-items: start; }
+  @media (max-width: 860px) { .practice { grid-template-columns: 1fr; } }
+  .practice > * { min-width: 0; }
+  .qnav { position: sticky; top: 16px; }
+  .qnav-role { font-weight: 800; font-size: 1.0625rem; line-height: 1.25; margin: 0 0 4px; }
+  .qnav-sub { font-size: 0.875rem; color: var(--muted); margin: 0 0 14px; }
+  .qlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .qlist button {
+    width: 100%; display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 8px;
+    padding: 9px 10px; border: 0; border-radius: var(--r-sm); background: transparent;
+    font: inherit; font-size: 0.9375rem; color: var(--ink); text-align: left; cursor: pointer;
+  }
+  .qlist button:hover { background: var(--sheet); }
+  .qlist button[aria-current="true"] { background: var(--sheet); box-shadow: inset 3px 0 0 var(--accent); }
+  .qnum { font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .qtype { text-transform: none; }
+  .qscore { font-size: 0.8125rem; font-weight: 600; font-variant-numeric: tabular-nums; padding: 1px 8px; border-radius: 999px; background: var(--paper); }
+  .qnav-foot { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; font-size: 0.9375rem; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .linkish:hover { color: var(--ink); }
+  @media (max-width: 860px) {
+    .qnav { position: static; }
+    .qlist { flex-direction: row; overflow-x: auto; padding-bottom: 4px; }
+    .qlist button { grid-template-columns: auto auto; white-space: nowrap; }
+    .qlist .qtype, .qlist .qscore.empty { display: none; }
+    .kbd-hint { display: none; }
+    .qnav-foot { flex-direction: row; gap: 18px; }
+  }
+
+  /* ---------- Summary ---------- */
+  .sum-head { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; margin-bottom: 8px; }
+  .sum-note { color: var(--muted); margin: 0 0 24px; }
+  .sum-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .sum-table th { text-align: left; font-weight: 600; color: var(--muted); font-size: 0.8125rem; padding: 0 8px 8px 0; border-bottom: 1px solid var(--line); }
+  .sum-table td { padding: 12px 8px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .sum-table td:last-child { text-align: right; white-space: nowrap; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+
+  /* ---------- How it works + footer ---------- */
+  .how { margin-top: clamp(48px, 7vw, 80px); }
+  .how-title { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.015em; margin: 0 0 20px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 32px); }
+  @media (max-width: 720px) { .steps { grid-template-columns: 1fr; } }
+  .steps li { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .step-num { font-size: 0.8125rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .step-title { display: block; font-weight: 600; font-size: 1.0625rem; margin: 2px 0 4px; }
+  .steps p { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+  .built { margin: 24px 0 0; color: var(--muted); font-size: 0.9375rem; }
+  .built a { color: var(--ink); text-underline-offset: 3px; }
+  .built a:hover { color: var(--accent); }
+
+  .site-footer {
+    margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.875rem; color: var(--muted);
+  }
+  .site-footer p { margin: 0; }
+  .site-footer a { color: inherit; text-underline-offset: 3px; }
+  .site-footer a:hover { color: var(--ink); }
+
+  .demo-note { font-size: 0.8125rem; color: var(--muted); margin-top: 14px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scan::after { animation: none; left: 0; width: 100%; opacity: .6; }
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="topbar" aria-label="Site">
+    <span><span class="wordmark">Interview Prep Coach</span><span class="byline">by <a href="https://cjalberto.vercel.app">Christian Joshua Alberto</a></span></span>
+    <span class="topbar-links">
+      <a href="https://albertocj1.github.io/Resume-Fit-Analysis-App/">Resume Fit Analyzer</a>
+      <a href="https://github.com/albertocj1/Interview-Prep-Coach">View on GitHub</a>
+    </span>
+  </nav>
+
+  <header>
+    <h1>Practice the questions this job will ask you.</h1>
+    <p>Paste a job description and add your resume. You'll get 6 likely interview questions, then a score and feedback on every answer you write.</p>
+  </header>
+
+  <!-- ===== Setup ===== -->
+  <div id="setupView" class="layout">
+    <form id="setupForm" novalidate>
+      <div class="handoff" id="handoff" hidden>
+        <p id="handoffText"></p>
+        <button type="button" id="handoffClear">Don't focus on these</button>
+      </div>
+
+      <div>
+        <label class="field-label" for="jd">Job description</label>
+        <textarea id="jd" placeholder="Paste the full posting: responsibilities, requirements, and nice-to-haves."></textarea>
+      </div>
+
+      <div>
+        <label class="field-label" for="resume">Resume <span class="hint">PDF, up to 5 MB</span></label>
+        <div class="drop" id="drop">
+          <div class="doc-icon" aria-hidden="true"></div>
+          <div class="drop-text">
+            <strong id="fileName">Choose a PDF or drop it here</strong>
+            <span id="fileMeta">Scanned PDFs work too</span>
+          </div>
+          <input type="file" id="resume" accept="application/pdf,.pdf">
+        </div>
+      </div>
+
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="actions-row">
+        <button type="submit" class="primary" id="startBtn">Generate questions</button>
+        <button type="button" class="ghost" id="sampleBtn">Try a sample</button>
+      </div>
+    </form>
+
+    <div class="panel" id="setupPanel" aria-live="polite">
+      <div class="intro">
+        <div class="intro-text">
+          <strong>Your questions will appear here</strong>
+          No job description or resume handy? Click <b>Try a sample</b> to practice with an example.
+        </div>
+        <div class="ghost-preview" aria-hidden="true">
+          <div class="q-meta"><span class="q-count">Question 3 of 6</span><span class="chip gap">Gap</span></div>
+          <p class="q-text">The role asks for two years in automation. Walk me through the most complex workflow you've owned end to end.</p>
+          <p class="why"><b>Why they ask this:</b> to see whether project depth makes up for fewer years of experience.</p>
+          <div class="fb-head"><div class="fb-score">7<small>/10</small></div><div class="fb-verdict" style="color: var(--band-good)">Good</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Practice ===== -->
+  <div id="practiceView" class="practice" hidden>
+    <aside class="qnav" aria-label="Questions">
+      <p class="qnav-role" id="roleTitle"></p>
+      <p class="qnav-sub" id="progressText"></p>
+      <ol class="qlist" id="qlist"></ol>
+      <div class="qnav-foot">
+        <button type="button" class="linkish" id="summaryLink">See summary</button>
+        <button type="button" class="linkish" id="restartLink">Start over with a new job</button>
+      </div>
+    </aside>
+
+    <main class="panel" id="stage" aria-live="polite"></main>
+  </div>
+
+  <section class="how" aria-labelledby="howTitle">
+    <h2 class="how-title" id="howTitle">How it works</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">01</span>
+        <span class="step-title">Add the job and your resume</span>
+        <p>Gemini compares them and writes 6 questions an interviewer would likely ask, including ones that probe your gaps.</p>
+      </li>
+      <li>
+        <span class="step-num">02</span>
+        <span class="step-title">Answer in your own words</span>
+        <p>Type your answer the way you'd say it. Open the hints if you're stuck on what a strong answer covers.</p>
+      </li>
+      <li>
+        <span class="step-num">03</span>
+        <span class="step-title">Get scored and try again</span>
+        <p>Each answer gets a score out of 10, specific fixes, a stronger version, and a follow-up question to practice.</p>
+      </li>
+    </ol>
+    <p class="built">Built with n8n and Google Gemini. <a href="https://github.com/albertocj1/Interview-Prep-Coach">View the source on GitHub</a></p>
+  </section>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Christian Joshua Alberto. All rights reserved.</p>
+    <p><a href="https://cjalberto.vercel.app">cjalberto.vercel.app</a></p>
+  </footer>
+</div>
+
+<script>
+  /* ---------- Config ----------
+     Paste your n8n Production webhook URLs here.
+     Leave both empty to preview the page with sample data. */
+  const QUESTIONS_ENDPOINT = "https://n8n-u7yp.srv1959326.hstgr.cloud/webhook/interview-questions";
+  const FEEDBACK_ENDPOINT  = "https://n8n-u7yp.srv1959326.hstgr.cloud/webhook/interview-feedback";
+  const TIMEOUT_MS = 90 * 1000;
+  const MAX_BYTES = 5 * 1024 * 1024;
+  const HANDOFF_KEY = "rfa-handoff";
+  const SAMPLE_RESUME_URL = "sample-resume.pdf";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const $ = id => document.getElementById(id);
+  const setupView = $("setupView"), practiceView = $("practiceView");
+  const form = $("setupForm"), jd = $("jd"), fileInput = $("resume"), drop = $("drop");
+  const fileName = $("fileName"), fileMeta = $("fileMeta"), formError = $("formError");
+  const startBtn = $("startBtn"), sampleBtn = $("sampleBtn"), setupPanel = $("setupPanel");
+  const stage = $("stage"), qlist = $("qlist");
+
+  const TYPE_LABEL = { gap: "Gap", technical: "Technical", behavioral: "Behavioral", "role-fit": "Role fit" };
+  const VERDICT_COLOR = { Strong: "var(--band-strong)", Good: "var(--band-good)", "Needs work": "var(--band-partial)", Weak: "var(--band-no)" };
+
+  /* ---------- State (lives only in this tab) ---------- */
+  let selectedFile = null;
+  let focusGaps = [];
+  let state = null;   // { role, profile, jd, questions: [...], current, view, thread, demo }
+
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  /* ---------- Handoff from Resume Fit Analyzer ---------- */
+  (function readHandoff() {
+    let data = null;
+    try { data = JSON.parse(localStorage.getItem(HANDOFF_KEY) || "null"); localStorage.removeItem(HANDOFF_KEY); } catch {}
+    if (!data || !data.job_description) return;
+    if (data.saved_at && Date.now() - data.saved_at > 2 * 3600 * 1000) return;
+    jd.value = data.job_description;
+    focusGaps = (data.missing_skills || []).slice(0, 10);
+    $("handoffText").textContent = focusGaps.length
+      ? `Job description loaded from Resume Fit Analyzer. Gap questions will focus on: ${focusGaps.join(", ")}. Add your resume to start.`
+      : "Job description loaded from Resume Fit Analyzer. Add your resume to start.";
+    $("handoff").hidden = false;
+    if (!focusGaps.length) $("handoffClear").hidden = true;
+  })();
+  $("handoffClear").addEventListener("click", () => { focusGaps = []; $("handoff").hidden = true; });
+
+  /* ---------- File input ---------- */
+  function setFile(file) {
+    if (!file) return;
+    selectedFile = file;
+    fileName.textContent = file.name;
+    fileMeta.textContent = (file.size / 1024).toFixed(0) + " KB · click to replace";
+    drop.classList.add("has-file");
+    formError.textContent = "";
+  }
+  fileInput.addEventListener("change", () => setFile(fileInput.files[0]));
+  ["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("dragging"); }));
+  ["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("dragging"); }));
+  drop.addEventListener("drop", e => setFile(e.dataTransfer.files[0]));
+
+  function validate() {
+    if (jd.value.trim().length < 80) return "Paste the full job description. It needs at least a few sentences to base questions on.";
+    if (!selectedFile) return "Add your resume in PDF format.";
+    const isPdf = selectedFile.type === "application/pdf" || /\.pdf$/i.test(selectedFile.name);
+    if (!isPdf) return "The resume must be a PDF. Export it from Word or Google Docs as PDF and try again.";
+    if (selectedFile.size > MAX_BYTES) return "The resume is larger than 5 MB. Try a compressed export.";
+    return "";
+  }
+
+  /* ---------- Network ---------- */
+  async function postForm(url, fields) {
+    const body = new FormData();
+    for (const [k, v] of Object.entries(fields)) {
+      if (v instanceof File) body.append(k, v, v.name);
+      else body.append(k, typeof v === "string" ? v : JSON.stringify(v));
+    }
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    try {
+      const res = await fetch(url, { method: "POST", body, signal: controller.signal });
+      if (!res.ok) throw Object.assign(new Error("The coaching service returned an error. Please try again in a moment."), { detail: `HTTP ${res.status}` });
+      let data = await res.json();
+      if (Array.isArray(data)) data = data[0];
+      if (data && data.error) throw Object.assign(new Error("The AI model couldn't finish. Please try again in a moment."), { detail: data.error });
+      return data;
+    } catch (err) {
+      if (err.name === "AbortError") throw Object.assign(new Error("This is taking longer than expected. Please try again in a moment."), { detail: `No response after ${TIMEOUT_MS / 1000} seconds.` });
+      if (err instanceof TypeError) throw Object.assign(new Error("Couldn't reach the coaching service. Check your connection and try again."), { detail: err.message });
+      throw err;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  /* ---------- Loading + error states ---------- */
+  let loadingTimer = null;
+  function stopLoading() { if (loadingTimer) { clearInterval(loadingTimer); loadingTimer = null; } }
+
+  function renderLoading(container, steps, note) {
+    stopLoading();
+    container.replaceChildren();
+    const box = el("div", "state");
+    const step = el("strong", "loading-step", steps[0]);
+    const count = el("div", "loading-count", "0s");
+    box.append(step, document.createTextNode(note), el("div", "scan"), count);
+    container.append(box);
+    const started = Date.now();
+    let i = 0;
+    loadingTimer = setInterval(() => {
+      const secs = Math.floor((Date.now() - started) / 1000);
+      count.textContent = secs + "s";
+      const next = Math.min(Math.floor(secs / 5), steps.length - 1);
+      if (next !== i) {
+        i = next;
+        step.style.opacity = 0;
+        setTimeout(() => { step.textContent = steps[i]; step.style.opacity = 1; }, reduceMotion ? 0 : 250);
+      }
+    }, 1000);
+  }
+
+  function renderError(container, err, retry) {
+    stopLoading();
+    container.replaceChildren();
+    const box = el("div", "state error");
+    box.append(el("strong", null, "That didn't finish"), document.createTextNode(err.message));
+    if (err.detail) box.append(el("p", "error-detail", "Details: " + err.detail));
+    if (retry) {
+      const row = el("div", "actions-row"); row.style.marginTop = "18px";
+      const b = el("button", "ghost", "Try again"); b.type = "button"; b.addEventListener("click", retry);
+      row.append(b); box.append(row);
+    }
+    container.append(box);
+  }
+
+  function scrollIntoViewIfNarrow(node) {
+    if (window.matchMedia("(max-width: 860px)").matches) node.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  /* ---------- Step 1: generate questions ---------- */
+  async function generate() {
+    const problem = validate();
+    formError.textContent = problem;
+    if (problem) return;
+
+    startBtn.disabled = sampleBtn.disabled = true;
+    startBtn.textContent = "Generating…";
+    renderLoading(setupPanel, ["Reading your resume", "Finding the job's requirements", "Spotting the gaps", "Writing interview questions"], "This usually takes 15–30 seconds.");
+    scrollIntoViewIfNarrow(setupPanel);
+
+    try {
+      let data;
+      if (!QUESTIONS_ENDPOINT) {
+        await new Promise(r => setTimeout(r, 1200));
+        data = DEMO_QUESTIONS;
+      } else {
+        data = await postForm(QUESTIONS_ENDPOINT, {
+          job_description: jd.value.trim(),
+          focus_gaps: focusGaps,
+          resume: selectedFile
+        });
+      }
+      if (!data || !Array.isArray(data.questions) || !data.questions.length) {
+        throw Object.assign(new Error("No questions came back. Please try again."), { detail: "Response had no questions." });
+      }
+      stopLoading();
+      startPractice(data, !QUESTIONS_ENDPOINT);
+    } catch (err) {
+      renderError(setupPanel, err, generate);
+    } finally {
+      startBtn.disabled = sampleBtn.disabled = false;
+      startBtn.textContent = "Generate questions";
+    }
+  }
+  form.addEventListener("submit", e => { e.preventDefault(); generate(); });
+
+  sampleBtn.addEventListener("click", async () => {
+    sampleBtn.disabled = true;
+    formError.textContent = "";
+    try {
+      const res = await fetch(SAMPLE_RESUME_URL);
+      if (!res.ok) throw new Error();
+      const blob = await res.blob();
+      jd.value = SAMPLE_JD;
+      setFile(new File([blob], "sample-resume.pdf", { type: "application/pdf" }));
+      generate();
+    } catch {
+      formError.textContent = "Couldn't load the sample resume. Make sure sample-resume.pdf is next to index.html.";
+      sampleBtn.disabled = false;
+    }
+  });
+
+  function startPractice(data, demo) {
+    state = {
+      role: data.role_title || "Interview practice",
+      profile: data.candidate_profile || "",
+      jd: jd.value.trim(),
+      demo,
+      questions: data.questions.map((q, i) => ({ ...q, id: i + 1, attempts: [], followups: [] })),
+      current: 0,
+      view: "question",
+      thread: null,      // { question, previous: {question, answer} } when answering a follow-up
+      lastFeedback: null,
+      draft: ""
+    };
+    setupView.hidden = true;
+    practiceView.hidden = false;
+    $("roleTitle").textContent = state.role;
+    renderNav();
+    renderQuestion();
+    practiceView.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+
+  /* ---------- Navigation ---------- */
+  const bestScore = q => q.attempts.length ? Math.max(...q.attempts.map(a => a.feedback.score)) : null;
+
+  function renderNav() {
+    const answered = state.questions.filter(q => q.attempts.length).length;
+    $("progressText").textContent = `${answered} of ${state.questions.length} answered`;
+    qlist.replaceChildren();
+    state.questions.forEach((q, i) => {
+      const li = el("li");
+      const b = el("button");
+      b.type = "button";
+      if (state.view === "question" && i === state.current) b.setAttribute("aria-current", "true");
+      const best = bestScore(q);
+      b.append(el("span", "qnum", String(i + 1)), el("span", "qtype", TYPE_LABEL[q.type] || "Question"));
+      const s = el("span", best == null ? "qscore empty" : "qscore", best == null ? "–" : `${best}/10`);
+      b.setAttribute("aria-label", `Question ${i + 1}, ${TYPE_LABEL[q.type] || ""}${best == null ? ", not answered" : `, best score ${best} out of 10`}`);
+      b.append(s);
+      b.addEventListener("click", () => goTo(i));
+      li.append(b);
+      qlist.append(li);
+    });
+  }
+
+  function goTo(i) {
+    state.current = i;
+    state.view = "question";
+    state.thread = null;
+    state.lastFeedback = null;
+    state.draft = "";
+    renderNav();
+    renderQuestion();
+    scrollIntoViewIfNarrow(stage);
+  }
+
+  /* ---------- Step 2: question + answer ---------- */
+  function renderQuestion() {
+    stopLoading();
+    const q = state.questions[state.current];
+    const isFollow = !!state.thread;
+    stage.replaceChildren();
+
+    const meta = el("div", "q-meta");
+    meta.append(el("span", "q-count", `Question ${state.current + 1} of ${state.questions.length}`));
+    meta.append(el("span", `chip ${q.type}`, isFollow ? "Follow-up" : (TYPE_LABEL[q.type] || "Question")));
+    stage.append(meta);
+
+    if (isFollow) {
+      stage.append(el("p", "q-text", state.thread.question));
+      stage.append(el("p", "thread-note", `Following up on: ${q.question}`));
+    } else {
+      stage.append(el("p", "q-text", q.question));
+      const why = el("p", "why");
+      why.append(el("b", null, "Why they ask this: "), document.createTextNode(q.why_asked || ""));
+      stage.append(why);
+      if (q.good_answer_covers && q.good_answer_covers.length) {
+        const btn = el("button", "reveal", "Show what a strong answer covers");
+        btn.type = "button";
+        const list = el("ul", "covers");
+        list.hidden = true;
+        q.good_answer_covers.forEach(c => list.append(el("li", null, c)));
+        btn.setAttribute("aria-expanded", "false");
+        btn.addEventListener("click", () => {
+          list.hidden = !list.hidden;
+          btn.setAttribute("aria-expanded", String(!list.hidden));
+          btn.textContent = list.hidden ? "Show what a strong answer covers" : "Hide hints";
+        });
+        stage.append(btn, list);
+      }
+    }
+
+    const box = el("div", "answer-box");
+    const label = el("label", "field-label", "Your answer");
+    label.htmlFor = "answer";
+    const ta = el("textarea");
+    ta.id = "answer";
+    ta.placeholder = "Answer the way you'd say it out loud. Use a real example from your experience.";
+    ta.value = state.draft || "";
+    const foot = el("div", "answer-foot");
+    const wc = el("span");
+    const updateCount = () => {
+      const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+      wc.replaceChildren(el("b", null, String(words)), document.createTextNode(" words · aim for 100–200"));
+    };
+    updateCount();
+    ta.addEventListener("input", () => { state.draft = ta.value; updateCount(); });
+    foot.append(wc, el("span", "kbd-hint", "Ctrl + Enter to submit"));
+
+    const row = el("div", "actions-row");
+    const submit = el("button", "primary", "Get feedback");
+    submit.type = "button";
+    submit.addEventListener("click", () => submitAnswer(ta.value));
+    ta.addEventListener("keydown", e => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") submitAnswer(ta.value); });
+    row.append(submit);
+    if (isFollow) {
+      const back = el("button", "ghost", "Back to the main question");
+      back.type = "button";
+      back.addEventListener("click", () => goTo(state.current));
+      row.append(back);
+    } else if (state.current < state.questions.length - 1) {
+      const skip = el("button", "ghost", "Skip for now");
+      skip.type = "button";
+      skip.addEventListener("click", () => goTo(state.current + 1));
+      row.append(skip);
+    }
+    box.append(label, ta, foot, row);
+    stage.append(box);
+
+    const fbHost = el("div");
+    fbHost.id = "fbHost";
+    stage.append(fbHost);
+    if (state.lastFeedback) renderFeedback(state.lastFeedback);
+  }
+
+  /* ---------- Step 3: feedback ---------- */
+  async function submitAnswer(text) {
+    const answer = text.trim();
+    const host = $("fbHost");
+    if (answer.split(/\s+/).filter(Boolean).length < 5) {
+      host.replaceChildren(el("p", "form-error", "Write at least a sentence or two so there's something to give feedback on."));
+      host.firstChild.style.marginTop = "12px";
+      return;
+    }
+    const q = state.questions[state.current];
+    const isFollow = !!state.thread;
+    const question = isFollow
+      ? { type: q.type, question: state.thread.question, good_answer_covers: [] }
+      : { type: q.type, question: q.question, good_answer_covers: q.good_answer_covers || [] };
+
+    stage.querySelectorAll("button, textarea").forEach(n => n.disabled = true);
+    host.className = "feedback";
+    renderLoading(host, ["Reading your answer", "Checking it against the role", "Scoring the answer", "Writing a stronger version"], "Usually 10–20 seconds.");
+    host.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
+
+    try {
+      let fb;
+      if (!FEEDBACK_ENDPOINT) {
+        await new Promise(r => setTimeout(r, 1200));
+        fb = demoFeedback(answer);
+      } else {
+        fb = await postForm(FEEDBACK_ENDPOINT, {
+          job_description: state.jd,
+          candidate_profile: state.profile,
+          question,
+          answer,
+          ...(isFollow ? { previous: state.thread.previous } : {})
+        });
+      }
+      if (!fb || fb.score == null) throw Object.assign(new Error("The feedback came back without a score. Please try again."), { detail: "Response had no score." });
+
+      const record = { answer, feedback: fb };
+      if (isFollow) q.followups.push({ question: state.thread.question, ...record });
+      else q.attempts.push(record);
+      state.lastFeedback = { ...fb, answer, isFollow };
+      stopLoading();
+      stage.querySelectorAll("button, textarea").forEach(n => n.disabled = false);
+      renderNav();
+      renderFeedback(state.lastFeedback);
+    } catch (err) {
+      stage.querySelectorAll("button, textarea").forEach(n => n.disabled = false);
+      renderError(host, err, () => submitAnswer(answer));
+    }
+  }
+
+  function renderFeedback(fb) {
+    stopLoading();
+    const host = $("fbHost");
+    host.className = "feedback";
+    host.replaceChildren();
+    const q = state.questions[state.current];
+
+    const head = el("div", "fb-head");
+    const score = el("div", "fb-score", String(fb.score));
+    score.append(el("small", null, "/10"));
+    const verdict = el("div", "fb-verdict", fb.verdict);
+    verdict.style.color = VERDICT_COLOR[fb.verdict] || "var(--ink)";
+    head.append(score, verdict);
+    host.append(head);
+
+    const rubric = el("div", "rubric");
+    [["Relevance", "relevance"], ["Specific examples", "specificity"], ["Structure", "structure"], ["Honesty", "honesty"]].forEach(([label, key]) => {
+      const v = (fb.rubric || {})[key] || 0;
+      const row = el("div", "rubric-row");
+      const pips = el("span", "pips");
+      pips.setAttribute("aria-label", `${v} out of 5`);
+      for (let i = 1; i <= 5; i++) pips.append(el("i", i <= v ? "on" : null));
+      row.append(el("span", null, label), pips);
+      rubric.append(row);
+    });
+    host.append(rubric);
+
+    const section = (title, items) => {
+      if (!items || !items.length) return;
+      const s = el("div", "fb-section");
+      s.append(el("h3", null, title));
+      const ul = el("ul", "fb-list");
+      items.forEach(t => ul.append(el("li", null, t)));
+      s.append(ul);
+      host.append(s);
+    };
+    section("What worked", fb.strengths);
+    section("What to improve", fb.improvements);
+
+    if (fb.improved_answer) {
+      const s = el("div", "fb-section");
+      s.append(el("h3", null, "A stronger version"), el("p", "better", fb.improved_answer));
+      host.append(s);
+    }
+
+    if (fb.follow_up_question) {
+      const f = el("div", "follow");
+      f.append(el("span", null, "They might ask next"), el("p", null, fb.follow_up_question));
+      const b = el("button", "ghost", "Answer the follow-up");
+      b.type = "button";
+      b.addEventListener("click", () => {
+        const base = state.thread ? state.thread.question : q.question;
+        state.thread = { question: fb.follow_up_question, previous: { question: base, answer: fb.answer } };
+        state.lastFeedback = null;
+        state.draft = "";
+        renderQuestion();
+        scrollIntoViewIfNarrow(stage);
+        $("answer").focus();
+      });
+      f.append(b);
+      host.append(f);
+    }
+
+    const actions = el("div", "fb-actions");
+    const again = el("button", "ghost", "Try again");
+    again.type = "button";
+    again.addEventListener("click", () => {
+      state.lastFeedback = null;
+      host.replaceChildren();
+      host.className = "";
+      const ta = $("answer");
+      ta.focus();
+    });
+    actions.append(again);
+
+    const unanswered = state.questions.findIndex((x, i) => i > state.current && !x.attempts.length);
+    const nextIdx = unanswered !== -1 ? unanswered : (state.current < state.questions.length - 1 ? state.current + 1 : -1);
+    const allDone = state.questions.every(x => x.attempts.length);
+    if (nextIdx !== -1 && !allDone) {
+      const next = el("button", "primary", "Next question");
+      next.type = "button";
+      next.addEventListener("click", () => goTo(nextIdx));
+      actions.append(next);
+    } else {
+      const sum = el("button", "primary", "See summary");
+      sum.type = "button";
+      sum.addEventListener("click", renderSummary);
+      actions.append(sum);
+    }
+    host.append(actions);
+    if (state.demo) host.append(el("p", "demo-note", "Sample feedback. Set the endpoints in the page script to connect your n8n workflow."));
+  }
+
+  /* ---------- Summary ---------- */
+  function renderSummary() {
+    stopLoading();
+    state.view = "summary";
+    state.thread = null;
+    renderNav();
+    stage.replaceChildren();
+
+    const scored = state.questions.filter(q => q.attempts.length);
+    if (!scored.length) {
+      const box = el("div", "state");
+      box.append(el("strong", null, "No answers yet"), document.createTextNode("Answer at least one question to see your summary."));
+      const b = el("button", "primary", "Go to question 1"); b.type = "button"; b.style.marginTop = "18px"; b.style.alignSelf = "flex-start";
+      b.addEventListener("click", () => goTo(0));
+      box.append(b);
+      stage.append(box);
+      return;
+    }
+    const avg = scored.reduce((s, q) => s + bestScore(q), 0) / scored.length;
+    const head = el("div", "sum-head");
+    const big = el("div", "fb-score", avg.toFixed(1));
+    big.append(el("small", null, "/10"));
+    const label = avg >= 9 ? "Strong" : avg >= 7 ? "Good" : avg >= 5 ? "Needs work" : "Weak";
+    const v = el("div", "fb-verdict", label + " on average");
+    v.style.color = VERDICT_COLOR[label];
+    head.append(big, v);
+    stage.append(head);
+    stage.append(el("p", "sum-note", `Based on your best attempt at ${scored.length} of ${state.questions.length} questions.`));
+
+    const wrap = el("div", "table-wrap");
+    const table = el("table", "sum-table");
+    const thead = el("thead"); const tr = el("tr");
+    ["#", "Question", "Best"].forEach(t => tr.append(el("th", null, t)));
+    thead.append(tr);
+    const tbody = el("tbody");
+    state.questions.forEach((q, i) => {
+      const row = el("tr");
+      const best = bestScore(q);
+      const qcell = el("td");
+      const link = el("button", "linkish", q.question);
+      link.type = "button"; link.style.textAlign = "left"; link.style.color = "var(--ink)";
+      link.addEventListener("click", () => goTo(i));
+      qcell.append(link, el("div", "hint", `${TYPE_LABEL[q.type] || ""}${q.attempts.length > 1 ? ` · ${q.attempts.length} attempts` : ""}`));
+      row.append(el("td", null, String(i + 1)), qcell, el("td", null, best == null ? "Skipped" : `${best}/10`));
+      tbody.append(row);
+    });
+    table.append(thead, tbody); wrap.append(table); stage.append(wrap);
+
+    const weak = state.questions.map((q, i) => ({ q, i, s: bestScore(q) })).filter(x => x.s == null || x.s < 7);
+    const actions = el("div", "fb-actions");
+    if (weak.length) {
+      const b = el("button", "primary", weak[0].s == null ? "Answer the skipped questions" : "Practice the weakest answers");
+      b.type = "button";
+      b.addEventListener("click", () => goTo(weak.sort((a, c) => (a.s ?? -1) - (c.s ?? -1))[0].i));
+      actions.append(b);
+    }
+    const copy = el("button", "ghost", "Copy summary");
+    copy.type = "button";
+    copy.addEventListener("click", async () => {
+      const lines = [`Interview practice: ${state.role}`, `Average: ${avg.toFixed(1)}/10`, ""];
+      state.questions.forEach((q, i) => {
+        const best = bestScore(q);
+        lines.push(`${i + 1}. ${q.question} (${best == null ? "skipped" : best + "/10"})`);
+        const last = q.attempts[q.attempts.length - 1];
+        if (last) last.feedback.improvements.forEach(t => lines.push("   - " + t));
+      });
+      try { await navigator.clipboard.writeText(lines.join("\n")); copy.textContent = "Copied"; }
+      catch { copy.textContent = "Copy not available"; }
+      setTimeout(() => (copy.textContent = "Copy summary"), 1800);
+    });
+    actions.append(copy);
+    stage.append(actions);
+    scrollIntoViewIfNarrow(stage);
+  }
+
+  $("summaryLink").addEventListener("click", renderSummary);
+  $("restartLink").addEventListener("click", () => {
+    if (state && state.questions.some(q => q.attempts.length) && !confirm("Start over? Your answers and scores for this job will be cleared.")) return;
+    state = null;
+    stopLoading();
+    practiceView.hidden = true;
+    setupView.hidden = false;
+    setupPanel.replaceChildren();
+    const box = el("div", "state");
+    box.append(el("strong", null, "Ready for a new job"), document.createTextNode("Paste the job description and add your resume to get a fresh set of questions."));
+    setupPanel.append(box);
+    jd.focus();
+  });
+
+  window.addEventListener("beforeunload", e => {
+    if (state && state.questions.some(q => q.attempts.length)) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  /* ---------- Sample data ---------- */
+  const SAMPLE_JD = `Automation Engineer (Mid-level) — Makati City, Hybrid
+
+We're looking for an Automation Engineer to design and maintain workflow automations that connect our sales, finance, and operations systems.
+
+Responsibilities
+- Build and maintain automated workflows using n8n or Make
+- Integrate third-party services through REST APIs and webhooks
+- Write Python scripts for data cleaning, reconciliation, and reporting
+- Add AI features (LLM APIs) to internal tools, such as document classification and summarization
+- Monitor workflows, fix failures, and document processes for non-technical teams
+
+Requirements
+- At least 2 years of experience in automation, integration, or backend development
+- Strong Python and SQL skills
+- Hands-on experience with n8n, Make, or Zapier
+- Experience working with REST APIs and JSON
+- Bachelor's degree in IT, Computer Science, or a related field
+
+Nice to have
+- Experience with AWS or Google Cloud
+- Docker and CI/CD pipelines
+- Experience with LLM APIs such as OpenAI or Gemini`;
+
+  const DEMO_QUESTIONS = {
+    role_title: "Automation Engineer (Mid-level)",
+    candidate_profile: "Junior automation developer with about 1.5 years of experience. Built 14 n8n workflows syncing Shopify, Google Sheets, and MySQL; Python scripts for courier report reconciliation; a Gemini email classifier. BS IT, 2024.",
+    questions: [
+      { type: "role-fit", question: "What draws you to an automation role that spans sales, finance, and operations, rather than a single team?", why_asked: "To understand motivation and whether you enjoy working across departments.", good_answer_covers: ["A real example of cross-team work", "What you enjoy about connecting systems", "Why this company's setup appeals to you"] },
+      { type: "behavioral", question: "Tell me about a time an automation you built failed in production. What happened and what did you change?", why_asked: "To see how you handle ownership, debugging, and prevention.", good_answer_covers: ["The specific failure and its impact", "How you found the cause", "What you changed to prevent it"] },
+      { type: "technical", question: "Your n8n workflow syncs orders from Shopify to MySQL. How do you make sure an order is never written twice if the workflow retries?", why_asked: "To test understanding of idempotency and reliable integrations.", good_answer_covers: ["Unique keys or upserts", "Checking before insert", "Handling retries and partial failures"] },
+      { type: "technical", question: "Walk me through how you'd reconcile two reports in Python when their dates and IDs are formatted differently.", why_asked: "To check practical data-cleaning skills.", good_answer_covers: ["Normalizing formats", "Choosing a join key", "Reporting mismatches"] },
+      { type: "gap", question: "The role asks for at least two years of experience. How does your 1.5 years prepare you to own workflows independently?", why_asked: "To see whether project depth makes up for fewer years.", good_answer_covers: ["Scope and complexity you've already owned", "Measurable results", "Honest acknowledgment of the gap"] },
+      { type: "gap", question: "You haven't listed AWS or Google Cloud. How would you get a workflow running reliably on cloud infrastructure?", why_asked: "To gauge how you approach an unfamiliar but nice-to-have skill.", good_answer_covers: ["Related experience (Docker, hosting n8n)", "A concrete learning plan", "Not overclaiming"] }
+    ]
+  };
+
+  function demoFeedback(answer) {
+    const words = answer.split(/\s+/).filter(Boolean).length;
+    const score = words < 25 ? 4 : words < 70 ? 6 : 8;
+    return {
+      score,
+      verdict: score >= 9 ? "Strong" : score >= 7 ? "Good" : score >= 5 ? "Needs work" : "Weak",
+      rubric: { relevance: Math.min(5, score / 2 + 1 | 0), specificity: Math.max(1, score / 2 - 1 | 0), structure: Math.min(5, score / 2 | 0), honesty: 4 },
+      strengths: ["You answered the question directly.", "Your example is relevant to the role."],
+      improvements: ["Name a specific result, such as hours saved or errors prevented.", "Walk through what you did step by step, then the outcome."],
+      improved_answer: "In my current role I own 14 n8n workflows that sync orders between Shopify, Google Sheets, and our MySQL database. When one failed after a Shopify API change, I traced the error in the execution log, added a check for the new field, and set up an alert so failures reach me within minutes. Since then, [add a specific result].",
+      follow_up_question: score >= 6 ? "How did you decide which failures should alert you immediately and which could wait?" : ""
+    };
+  }
+</script>
+</body>
+</html>
